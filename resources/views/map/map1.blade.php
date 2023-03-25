@@ -201,16 +201,16 @@
 				$('#main_table').DataTable().destroy();
 				$("#main_table_content").html(tb_cont);
 				$('#main_table').DataTable({
-			"ordering": false,
-            "dom": 'Bfrtip',
-            "buttons": [
-                'excel', 'print'
-            ],
-            "lengthMenu": [
-                [10, 25, 50,100, -1],
-                [10, 25, 50,100, 'All'],
-            ]
-		}).draw();
+                    "ordering": false,
+                    "dom": 'Bfrtip',
+                    "buttons": [
+                        'excel', 'print'
+                    ],
+                    "lengthMenu": [
+                        [10, 25, 50,100, -1],
+                        [10, 25, 50,100, 'All'],
+                    ]
+                }).draw();
                 init_plantmarkers(plantdata);
 			}
 		});
@@ -220,7 +220,11 @@
 			"ordering": false,
             "dom": 'Bfrtip',
             "buttons": [
-                'copy', 'csv', 'excel', 'pdf', 'print'
+                'excel', 'print'
+            ],
+            "lengthMenu": [
+                [10, 25, 50,100, -1],
+                [10, 25, 50,100, 'All'],
             ]
 		});
         set_Site_Id();
