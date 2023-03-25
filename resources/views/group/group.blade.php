@@ -60,6 +60,9 @@
 		});
 	}
 	(function($) {
+		var table = $('#main_table').DataTable({
+			"ordering": false
+		});
 		set_main_table_content();
 	})(jQuery);
     function submit_btn(Cement_Group_Id,Cement_Group,Status)

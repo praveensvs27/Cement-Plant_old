@@ -155,15 +155,12 @@
         var valu={state_id:state_id,group_id:group_id};
         jQuery.ajax({type: "GET",url: "/retrieve_db_plant_loc_stgr_table",data:valu,
             success: function(data) {
-                const initialMarkers = [];let j = 0;
+                const initialMarkers = [];
                 for (let i = 0; i < data.length; i++)
                 {
                     var data1=data[i];
-                    if((data1["latitude"]!="")&&(data1["longitude"]!=""))
-                    {
-                        var latitude=parseFloat(data1["latitude"]);var longitude=parseFloat(data1["longitude"]);
-                        initialMarkers[j]={"position":{"lat":latitude,"lng":longitude},"label":{"color":"white"},"draggable":false,"msg":"<b style='color:black;'>Group name : "+data1["cement_group"]+"<br>Company name : "+data1["cement_company"]+"<br>Plant name : "+data1["cement_plant"]+"</b>"};
-                    }
+                    var latitude=parseFloat(data1["latitude"]);var longitude=parseFloat(data1["longitude"]);
+                    initialMarkers[i]={"position":{"lat":latitude,"lng":longitude},"label":{"color":"white"},"draggable":false,"msg":"<b style='color:black;'>Group name : "+data1["cement_group"]+"<br>Company name : "+data1["cement_company"]+"<br>Plant name : "+data1["cement_plant"]+"</b>"};
                 }
                 initMarkers(initialMarkers);
             }

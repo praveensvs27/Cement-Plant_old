@@ -61,6 +61,9 @@
 		});
 	}
 	(function($) {
+		var table = $('#main_table').DataTable({
+			"ordering": false
+		});
 		set_main_table_content();
 	})(jQuery);
     function submit_btn(Cement_Company_Id,Cement_Company,Cement_Group_Id,Status)

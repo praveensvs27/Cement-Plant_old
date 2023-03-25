@@ -2,16 +2,16 @@
 @section('page_title','Plant Location')
 @section('main_content')
 <div class="container-fluid">
-	<div class="row page-titles mx-0">
+	<!--<div class="row page-titles mx-0">
 		<div class="col-sm-6 p-md-0">
 			<div class="welcome-text">
 				<h4>Plant Location</h4>
 			</div>
 		</div>
-	</div>
+	</div>-->
 	<div class="row mb-3">
 		<div class="col-md-9">
-            <div id="map" style="width:100%;height: 300px;"></div>
+            <div id="map" style="width:100%;height: 420px;"></div>
 			<div class="card">
 				<div class="card-body">
                     <div class="table-responsive" style="width:100%;">
@@ -75,7 +75,7 @@
                     map = new google.maps.Map(document.getElementById("map"), {center: {lat: 11.3410,lng: 77.7172,},zoom: 6.5});
                 }
                 function init_piermarkers(pierdata) {
-                    for (let i = 0; i < piermarkers.length; i++) {piermarkers[i].setMap(null);}piermarkers=[];
+                    //for (let i = 0; i < piermarkers.length; i++) {piermarkers[i].setMap(null);}piermarkers=[];
                     var plant_detail_tb_row=document.getElementsByClassName('plant_detail_tb_row');
                     for (let i = 0; i < plant_detail_tb_row.length; i++)
                     {
@@ -87,7 +87,7 @@
                     for (let index = 0; index < pierdata.length; index++)
                     {
                         const markerData = pierdata[index];
-                        const marker = new google.maps.Marker({
+                        /* const marker = new google.maps.Marker({
                             position: markerData.position,
                             label: markerData.label,
                             draggable: markerData.draggable,
@@ -99,7 +99,7 @@
                             if(activeInfoWindow) {activeInfoWindow.close();}
                             infowindow.open({anchor: marker,shouldFocus: false,map});
                             activeInfoWindow = infowindow;
-                        });
+                        }); */
                         var pierLocation = new google.maps.LatLng(markerData.position.lat,markerData.position.lng);
                         calculateRoutes(pierLocation);
                         break;
@@ -182,10 +182,7 @@
         }
         const pierdata = [];
         if((chbox.checked)?((latitude!=0)&&(longitude!=0)):false)
-        {
-            //var site_id=(chbox.id.split("-")[1]);
-            pierdata[0]={"position":{"lat":latitude,"lng":longitude},"label":{"text":"A","color":"white"},"draggable":false,"msg":"<b style='color:black;'>Site name : "+site_name+"</b>"};
-        }
+        {pierdata[0]={"position":{"lat":latitude,"lng":longitude},"label":{"text":"A","color":"white"},"draggable":false,"msg":"<b style='color:black;'>Site name : "+site_name+"</b>"};}
         init_piermarkers(pierdata);
     }
     function set_Plant_table()
@@ -199,16 +196,33 @@
                     var latitude=(data1["latitude"]!=""?parseFloat(data1["latitude"]):0);
                     var longitude=(data1["longitude"]!=""?parseFloat(data1["longitude"]):0);
                     tb_cont+="<tr class='plant_detail_tb_row'><td>"+(i+1)+"<input type='hidden' class='latitude' value='"+latitude+"'/><input type='hidden' class='longitude' value='"+longitude+"'/></td><td>"+data1["cement_group"]+"</td><td>"+data1["cement_company"]+"</td><td>"+data1["cement_plant"]+"</td><td>"+data1["city"]+"</td><td class='route1'>NULL</td><td class='route2'>NULL</td><td class='route3'>NULL</td></tr>";
-                    plantdata[i]={"position":{"lat":latitude,"lng":longitude},"label":{"text":"B","color":"white"},"draggable":false,"msg":"<b style='color:black;'>Group name : "+data1["cement_group"]+"<br>Company name : "+data1["cement_company"]+"<br>Plant name : "+data1["cement_plant"]+"</b>"};
+                    plantdata[i]={"position":{"lat":latitude,"lng":longitude},"label":{"color":"white"},"draggable":false,"msg":"<b style='color:black;'>Group name : "+data1["cement_group"]+"<br>Company name : "+data1["cement_company"]+"<br>Plant name : "+data1["cement_plant"]+"</b>"};
                 }
 				$('#main_table').DataTable().destroy();
 				$("#main_table_content").html(tb_cont);
-				$('#main_table').DataTable().draw();
+				$('#main_table').DataTable({
+			"ordering": false,
+            "dom": 'Bfrtip',
+            "buttons": [
+                'excel', 'print'
+            ],
+            "lengthMenu": [
+                [10, 25, 50,100, -1],
+                [10, 25, 50,100, 'All'],
+            ]
+		}).draw();
                 init_plantmarkers(plantdata);
 			}
 		});
 	}
     (function($) {
+		var table = $('#main_table').DataTable({
+			"ordering": false,
+            "dom": 'Bfrtip',
+            "buttons": [
+                'copy', 'csv', 'excel', 'pdf', 'print'
+            ]
+		});
         set_Site_Id();
         set_Plant_table();
     })(jQuery);

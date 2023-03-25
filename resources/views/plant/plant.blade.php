@@ -73,6 +73,9 @@
 		});
 	}
 	(function($) {
+		var table = $('#main_table').DataTable({
+			"ordering": false
+		});
 		set_main_table_content();
 	})(jQuery);
     function submit_btn(Cement_Plant_Id,Cement_Plant_Type_Id,Cement_Plant,Cement_Company,Latitude,Longitude,City,State_Id,Contact_Person_name,Contact_Phone_number,Contact_Email,Address,Status)
