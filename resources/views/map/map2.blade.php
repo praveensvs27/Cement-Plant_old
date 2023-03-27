@@ -127,7 +127,7 @@
         var valu={column:"cement_group_id,cement_group",table:"cement_group"};
         jQuery.ajax({type: "GET",url: "/retrieve_db_table",data:valu,
             success: function(data) {
-                var tb_cont="<li class='list-group-item p-0 px-1'><div class='custom-control custom-checkbox'><input class='custom-control-input group_checkbox_list' id='group_checkbox_list-all' type='checkbox' onclick='group_checkbox_list_all(this.checked);'><label class='cursor-pointer font-italic d-block custom-control-label' for='group_checkbox_list-all'>All (<span id='group_checkbox_list1-all'>0</span>)</label></div></li>";
+                var tb_cont="<li class='list-group-item p-0 px-1'><div class='custom-control custom-checkbox'><input class='custom-control-input group_checkbox_list' id='group_checkbox_list-all' type='checkbox' onclick='group_checkbox_list_all(this.checked);' checked><label class='cursor-pointer font-italic d-block custom-control-label' for='group_checkbox_list-all'>All (<span id='group_checkbox_list1-all'>0</span>)</label></div></li>";
                 for (let i = 0; i < data.length; i++)
                 {
                     var data1=data[i];var id=data1["cement_group_id"];
@@ -135,6 +135,8 @@
                 }
                 $("#group_checkbox_list").html(tb_cont);
                 state_checkbox_list_change();
+                //$("#group_checkbox_list-all").checked=true;
+                group_checkbox_list_all(true);
             }
         });
     }

@@ -7,14 +7,15 @@
             <div id="map" style="width:100%;height: 420px;"></div>
 			<div class="card">
 				<div class="card-body">
-                    <div class="table-responsive" style="width:100%;">
+                    <span id="site_name_select" style="color:black;font-weight:bold;">Choose Site Name</span>
+                    <div class="table-responsive" id="main_table_div" style="width:100%;">
                         <table id="main_table" class="display" style="min-width: 845px;color:black;">
                             <thead>
                                 <tr class="text-center">
                                     <th>Sno</th>
                                     <th>Group Name</th>
                                     <th>Company Name</th>
-                                    <th>Faculty Name</th>
+                                    <th>Facility Name</th>
                                     <th>City</th>
                                     <th>Location 1</th>
                                     <th>Location 2</th>
@@ -124,8 +125,7 @@
             <div class="form-group mb-0">
                 <label class="text-label mb-0">Site List</label>
                 <div style="background-color: #fff;color:black;border:1px solid #eaeaea;height:200px;overflow-y: scroll;">
-                    <ul class="list-group" id="site_checkbox_list">
-                    </ul>
+                    <ul class="list-group" id="site_checkbox_list"></ul>
                 </div>
             </div>
 		</div>
@@ -162,6 +162,10 @@
         const pierdata = [];
         if((chbox.checked)?((latitude!=0)&&(longitude!=0)):false)
         {pierdata[0]={"position":{"lat":latitude,"lng":longitude},"label":{"text":"A","color":"white"},"draggable":false,"msg":"<b style='color:black;'>Site name : "+site_name+"</b>"};}
+        if(chbox.checked)
+        {$("#site_name_select").html("From "+site_name);$('#main_table_div').show();}
+        else
+        {$("#site_name_select").html("Choose Site Name");$('#main_table_div').hide();}
         init_piermarkers(pierdata);
     }
     function set_Plant_table()
@@ -196,7 +200,7 @@
 		var table = $('#main_table').DataTable({
 			"ordering": false
 		});
-        set_Site_Id();
+        set_Site_Id();$('#main_table_div').hide();
         set_Plant_table();
     })(jQuery);
 </script>
