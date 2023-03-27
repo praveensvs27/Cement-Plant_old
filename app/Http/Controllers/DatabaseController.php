@@ -24,13 +24,13 @@ class DatabaseController extends Controller
             case "insert":
                 $Cement_Group=$request->input('Cement_Group');
                 $Status=$request->input('Status');
-                DB::insert("insert into cement_group(cement_group,status,create_dt,update_dt)VALUES('".$Cement_Group."','".$Status."',now(),now())");
+                DB::insert("insert into cement_group(cement_group,status,created_at,updated_at)VALUES('".$Cement_Group."','".$Status."',now(),now())");
                 break;
             case "update":
                 $Cement_Group_Id=$request->input('Cement_Group_Id');
                 $Cement_Group=$request->input('Cement_Group');
                 $Status=$request->input('Status');
-                DB::update("update cement_group set cement_group='".$Cement_Group."',status='".$Status."',update_dt=now() where cement_group_id='".$Cement_Group_Id."'");
+                DB::update("update cement_group set cement_group='".$Cement_Group."',status='".$Status."',updated_at=now() where cement_group_id='".$Cement_Group_Id."'");
                 break;
             case "delete":
                 $Cement_Group_Id=$request->input('Cement_Group_Id');
@@ -52,14 +52,14 @@ class DatabaseController extends Controller
                 $Cement_Company=$request->input('Cement_Company');
                 $Cement_Group_Id=$request->input('Cement_Group_Id');
                 $Status=$request->input('Status');
-                DB::insert("insert into cement_company(cement_company,cement_group_id,status,create_dt,update_dt)VALUES('".$Cement_Company."','".$Cement_Group_Id."','".$Status."',now(),now())");
+                DB::insert("insert into cement_company(cement_company,cement_group_id,status,created_at,updated_at)VALUES('".$Cement_Company."','".$Cement_Group_Id."','".$Status."',now(),now())");
                 break;
             case "update":
                 $Cement_Company_Id=$request->input('Cement_Company_Id');
                 $Cement_Company=$request->input('Cement_Company');
                 $Cement_Group_Id=$request->input('Cement_Group_Id');
                 $Status=$request->input('Status');
-                DB::insert("update cement_company set cement_company='".$Cement_Company."',cement_group_id='".$Cement_Group_Id."',status='".$Status."',update_dt=now() where cement_company_id='".$Cement_Company_Id."'");
+                DB::insert("update cement_company set cement_company='".$Cement_Company."',cement_group_id='".$Cement_Group_Id."',status='".$Status."',updated_at=now() where cement_company_id='".$Cement_Company_Id."'");
                 break;
             case "delete":
                 $Cement_Company_Id=$request->input('Cement_Company_Id');
@@ -74,7 +74,7 @@ class DatabaseController extends Controller
         switch($action)
         {
             case "retrieve":
-                $tb_list=DB::select("select *,(select cement_plant_type from cement_plant_type where cement_plant_type_id=cement_plant.cement_plant_type_id) as cement_plant_type,(select cement_company from cement_company where cement_company_id=cement_plant.cement_company_id) as cement_company,(select state_name from state_creation where state_id=cement_plant.state_id) as state_name,address from cement_plant");
+                $tb_list=DB::select("select *,(select cement_plant_type from cement_plant_type where cement_plant_type_id=cement_plant.cement_plant_type_id) as cement_plant_type,(select cement_company from cement_company where cement_company_id=cement_plant.cement_company_id) as cement_company,(select state_name from state_creation where state_id=cement_plant.)state_id as state_name,address from cement_plant");
                 return response()->json($tb_list);
                 break;
             case "insert":
@@ -90,7 +90,7 @@ class DatabaseController extends Controller
                 $Contact_Email=$request->input('Contact_Email');
                 $Address=$request->input('Address');
                 $Status=$request->input('Status');
-                DB::insert("insert into cement_plant(cement_plant_type_id,cement_plant,cement_company_id,latitude,longitude,contact_person_name,contact_phone_no,contact_email,city,state_id,address,status,create_dt,update_dt)VALUES('".$Cement_Plant_Type_Id."','".$Cement_Plant."','".$Cement_Company."','".$Latitude."','".$Longitude."','".$Contact_Person_name."','".$Contact_Phone_number."','".$Contact_Email."','".$City."','".$State_Id."','".$Address."','".$Status."',now(),now())");
+                DB::insert("insert into cement_plant(cement_plant_type_id,cement_plant,cement_company_id,latitude,longitude,contact_person_name,contact_phone_no,contact_email,city,state_id,address,status,created_at,updated_at)VALUES('".$Cement_Plant_Type_Id."','".$Cement_Plant."','".$Cement_Company."','".$Latitude."','".$Longitude."','".$Contact_Person_name."','".$Contact_Phone_number."','".$Contact_Email."','".$City."','".$State_Id."','".$Address."','".$Status."',now(),now())");
                 break;
             case "update":
                 $Cement_Plant_Id=$request->input('Cement_Plant_Id');
@@ -106,7 +106,7 @@ class DatabaseController extends Controller
                 $Contact_Email=$request->input('Contact_Email');
                 $Address=$request->input('Address');
                 $Status=$request->input('Status');
-                DB::update("update cement_plant set cement_plant_type_id='".$Cement_Plant_Type_Id."',cement_plant='".$Cement_Plant."',cement_company_id='".$Cement_Company."',latitude='".$Latitude."',longitude='".$Longitude."',contact_person_name='".$Contact_Person_name."',contact_phone_no='".$Contact_Phone_number."',contact_email='".$Contact_Email."',city='".$City."',state_id='".$State_Id."',address='".$Address."',status='".$Status."',update_dt=now() where cement_plant_id='".$Cement_Plant_Id."'");
+                DB::update("update cement_plant set cement_plant_type_id='".$Cement_Plant_Type_Id."',cement_plant='".$Cement_Plant."',cement_company_id='".$Cement_Company."',latitude='".$Latitude."',longitude='".$Longitude."',contact_person_name='".$Contact_Person_name."',contact_phone_no='".$Contact_Phone_number."',contact_email='".$Contact_Email."',city='".$City."',state_id='".$State_Id."',address='".$Address."',status='".$Status."',updated_at=now() where cement_plant_id='".$Cement_Plant_Id."'");
                 break;
             case "delete":
                 $Cement_Plant_Id=$request->input('Cement_Plant_Id');
@@ -127,13 +127,13 @@ class DatabaseController extends Controller
             case "insert":
                 $Cement_Plant_Type=$request->input('Cement_Plant_Type');
                 $Status=$request->input('Status');
-                DB::insert("insert into cement_plant_type(cement_plant_type,status,create_dt,update_dt)VALUES('".$Cement_Plant_Type."','".$Status."',now(),now())");
+                DB::insert("insert into cement_plant_type(cement_plant_type,status,created_at,updated_at)VALUES('".$Cement_Plant_Type."','".$Status."',now(),now())");
                 break;
             case "update":
                 $Cement_Plant_Type_Id=$request->input('Cement_Plant_Type_Id');
                 $Cement_Plant_Type=$request->input('Cement_Plant_Type');
                 $Status=$request->input('Status');
-                DB::update("update cement_plant_type set cement_plant_type='".$Cement_Plant_Type."',status='".$Status."',update_dt=now() where cement_plant_type_id='".$Cement_Plant_Type_Id."'");
+                DB::update("update cement_plant_type set cement_plant_type='".$Cement_Plant_Type."',status='".$Status."',updated_at=now() where cement_plant_type_id='".$Cement_Plant_Type_Id."'");
                 break;
             case "delete":
                 $Cement_Plant_Type_Id=$request->input('Cement_Plant_Type_Id');
