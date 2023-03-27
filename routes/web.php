@@ -36,4 +36,3 @@ Route::view('/Map2','map.map2');
 Route::get('/retrieve_db_group_cnt_table',[DatabaseController::class, 'retrieve_db_group_cnt_table']);
 Route::get('/retrieve_db_plant_loc_stgr_table',[DatabaseController::class, 'retrieve_db_plant_loc_stgr_table']);
 Route::get('/retrieve_db_plant_det_loc_table',[DatabaseController::class, 'retrieve_db_plant_det_loc_table']);
-//Route::get('/retrieve_db_plant_loc_site_table',[DatabaseController::class, 'retrieve_db_plant_loc_site_table']);

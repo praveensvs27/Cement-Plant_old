@@ -2,13 +2,6 @@
 @section('page_title','Plant Location')
 @section('main_content')
 <div class="container-fluid">
-	<!--<div class="row page-titles mx-0">
-		<div class="col-sm-6 p-md-0">
-			<div class="welcome-text">
-				<h4>Plant Location</h4>
-			</div>
-		</div>
-	</div>-->
 	<div class="row mb-3">
 		<div class="col-md-9">
             <div id="map" style="width:100%;height: 420px;"></div>
@@ -75,7 +68,6 @@
                     map = new google.maps.Map(document.getElementById("map"), {center: {lat: 11.3410,lng: 77.7172,},zoom: 6.5});
                 }
                 function init_piermarkers(pierdata) {
-                    //for (let i = 0; i < piermarkers.length; i++) {piermarkers[i].setMap(null);}piermarkers=[];
                     var plant_detail_tb_row=document.getElementsByClassName('plant_detail_tb_row');
                     for (let i = 0; i < plant_detail_tb_row.length; i++)
                     {
@@ -87,19 +79,6 @@
                     for (let index = 0; index < pierdata.length; index++)
                     {
                         const markerData = pierdata[index];
-                        /* const marker = new google.maps.Marker({
-                            position: markerData.position,
-                            label: markerData.label,
-                            draggable: markerData.draggable,
-                            map
-                        });
-                        piermarkers.push(marker);
-                        const infowindow = new google.maps.InfoWindow({content: `${markerData.msg}`,});
-                        marker.addListener("click", (event) => {
-                            if(activeInfoWindow) {activeInfoWindow.close();}
-                            infowindow.open({anchor: marker,shouldFocus: false,map});
-                            activeInfoWindow = infowindow;
-                        }); */
                         var pierLocation = new google.maps.LatLng(markerData.position.lat,markerData.position.lng);
                         calculateRoutes(pierLocation);
                         break;
@@ -202,14 +181,12 @@
 				$("#main_table_content").html(tb_cont);
 				$('#main_table').DataTable({
                     "ordering": false,
-                    "dom": 'Bfrtip',
-                    "buttons": [
-                        'excel', 'print'
-                    ],
+                    "dom": 'lBfrtip',
+                    "buttons": ['excel', 'print']/* ,
                     "lengthMenu": [
                         [10, 25, 50,100, -1],
                         [10, 25, 50,100, 'All'],
-                    ]
+                    ] */
                 }).draw();
                 init_plantmarkers(plantdata);
 			}
@@ -217,15 +194,7 @@
 	}
     (function($) {
 		var table = $('#main_table').DataTable({
-			"ordering": false,
-            "dom": 'Bfrtip',
-            "buttons": [
-                'excel', 'print'
-            ],
-            "lengthMenu": [
-                [10, 25, 50,100, -1],
-                [10, 25, 50,100, 'All'],
-            ]
+			"ordering": false
 		});
         set_Site_Id();
         set_Plant_table();

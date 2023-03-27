@@ -74,7 +74,7 @@ class DatabaseController extends Controller
         switch($action)
         {
             case "retrieve":
-                $tb_list=DB::select("select *,(select cement_plant_type from cement_plant_type where cement_plant_type_id=cement_plant.cement_plant_type_id) as cement_plant_type,(select cement_company from cement_company where cement_company_id=cement_plant.cement_company_id) as cement_company,(select state_name from state_creation where state_id=cement_plant.)state_id as state_name,address from cement_plant");
+                $tb_list=DB::select("select *,(select cement_plant_type from cement_plant_type where cement_plant_type_id=cement_plant.cement_plant_type_id) as cement_plant_type,(select cement_company from cement_company where cement_company_id=cement_plant.cement_company_id) as cement_company,(select state_name from state_creation where state_id=cement_plant.state_id) as state_name,address from cement_plant");
                 return response()->json($tb_list);
                 break;
             case "insert":
@@ -166,13 +166,4 @@ class DatabaseController extends Controller
         $tb_list=DB::select("SELECT (select cement_group from cement_group where cement_group_id=(select cement_group_id from cement_company where cement_company_id=cement_plant.cement_company_id)) as cement_group,(select cement_company from cement_company where cement_company_id=cement_plant.cement_company_id) as cement_company,cement_plant,city,latitude,longitude FROM cement_plant WHERE status=1");
         return response()->json($tb_list);
     }
-    /* public function retrieve_db_plant_loc_site_table(Request $request)
-    {
-        $site_id=$request->input('site_id');
-        if($site_id!="")
-        {
-            $tb_list=DB::select("SELECT latitude,longitude FROM site_creation WHERE id in (".$site_id.") and latitude!='' and longitude!=''");
-            return response()->json($tb_list);
-        }
-    } */
 }
